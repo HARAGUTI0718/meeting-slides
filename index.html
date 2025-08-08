@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入力係ミーティング資料</title>
+    <style>
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .slideshow-container {
+            max-width: 1000px;
+            width: 90%;
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            padding: 50px;
+            min-height: 450px;
+            position: relative;
+            background: white;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        .slide h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .slide h2::before {
+            content: "■";
+            color: #3498db;
+            margin-right: 10px;
+        }
+        
+        .slide h3 {
+            color: #e74c3c;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            margin-top: 30px;
+            background: #fff5f5;
+            padding: 10px 15px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .slide p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .slide ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .slide li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+        
+        .timeline {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .timeline-number {
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .slide-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #34495e;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        
+        .date-location {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        
+        .eval-tab {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        
+        .eval-tab.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .eval-tab:hover {
+            background: #e9ecef;
+        }
+        
+        .eval-tab.active:hover {
+            background: #2980b9;
+        }
+        
+        .eval-table {
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slide-counter">
+            <span id="slideNumber">1</span> / <span id="totalSlides">5</span>
+        </div>
+        
+        <!-- Slide 1: タイトル -->
+        <div class="slide active">
+            <h1>入力係ミーティング</h1>
+            <div class="date-location">2025年7月9日（水）16:00～</div>
+            
+            <div class="highlight">
+                <h2>本日の議題</h2>
+                <p style="font-size: 1.3em; text-align: center; color: #e74c3c; font-weight: bold;">
+                    システム移行に伴う今後の業務体制について
+                </p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div>システム移行について</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div>業務内容の変更点</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div>今後の体制について</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div>新しい配属先の決定方法</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2: システム移行 -->
+        <div class="slide">
+            <h1>システム移行について</h1>
+            
+            <h2>移行の概要</h2>
+            <div class="highlight">
+                <p style="font-size: 1.2em; font-weight: bold;">
+                    「商蔵奉行」→「N-SYSTEM」への移行
+                </p>
+                <p style="color: #e74c3c; font-weight: bold;">移行時期：2025年10月頃予定</p>
+            </div>
+            
+            <h2>移行の背景</h2>
+            <p>TOM-NETの案件情報をN-SYSTEMへ直接取り込むことが可能になったため、業務の効率化と自動化を図ります。</p>
+            
+            <h2>業務内容の変更</h2>
+            <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; border-left: 4px solid #27ae60;">
+                <h3 style="color: #27ae60; background: none; padding: 0; border: none;">✓ 現在の入力業務が不要に</h3>
+                <ul>
+                    <li>「商蔵奉行」への手動データ入力作業が自動化</li>
+                </ul>
+                <p style="font-size: 0.9em; color: #666; margin-top: 10px;">
+                    ※新しい業務フローの詳細について、ご希望の方にはPC画面でご説明します
+                </p>
+            </div>
+        </div>
+        
+        <!-- Slide 3: 今後の体制 -->
+        <div class="slide">
+            <h1>今後の体制について</h1>
+            
+            <h2>配属先の変更</h2>
+            <p>現在の入力業務がなくなることに伴い、皆様には新しい部署・役割へ異動していただく必要がございます。</p>
+            
+            <div class="highlight">
+                <p style="font-weight: bold; color: #27ae60;">
+                    これは、会社が成長していくための前向きな変更であり、<br>
+                    皆様の新しいキャリアをサポートするためのものです。
+                </p>
+            </div>
+            
+            <h2>新しい配属先の決定方法</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div>皆様一人ひとりと個別面談を実施致します。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div>ご本人の希望や適性について丁寧にヒアリングを行います。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div>これまでの経験やスキルを最大限に活用できるよう、多角的に検討いたします。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div style="line-height: 1.8;">最終的な配属先は、ご本人の意向と会社全体の状況を総合的に判断し、<br>決定させていただきます。</div>
+                </div>
+            </div>
+            
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; margin-top: 20px;">
+                <p style="font-size: 0.9em; color: #856404; margin: 0;">
+                    ※組織全体の状況や業務上の必要性を鑑み、必ずしもご本人の希望通りの配属先とならない場合があることをご承知おきください
+                </p>
+            </div>
+        </div>
+        
+        <!-- Slide 4: 配属先の検討方法 -->
+        <div class="slide">
+            <h1>配属先の検討方法</h1>
+            
+            <h2>評価制度の更新</h2>
+            <p>今後の配属先を公正かつ客観的に検討するため、現在の評価内容を更新します。</p>
+            <ul>
+                <li>皆様一人ひとりの強みや適性をより正確に把握</li>
+                <li>最適なマッチングを目指します</li>
+            </ul>
+            
+            <div class="highlight">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                    <p style="font-weight: bold; color: #2c3e50; margin: 0;">
+                        ※現時点での評価制度見本（一部抜粋）
+                    </p>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="businessTab" class="eval-tab active" onclick="switchEvaluationTab('business')">業務面評価</button>
+                        <button id="attitudeTab" class="eval-tab" onclick="switchEvaluationTab('attitude')">情意面評価</button>
+                    </div>
+                </div>
+                
+                <!-- 業務面評価表 -->
+                <div id="businessTable" class="eval-table" style="width: 100%; height: 320px; border: 2px solid #ddd; border-radius: 8px; background: white; overflow: hidden;">
+                    <table style="width: 100%; height: 100%; font-size: 0.54em; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #4a90e2; color: white; height: 8%;">
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 4%;">No</th>
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 13%;">評価タイトル</th>
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 31%;">詳細内容</th>
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 9%;">評価者</th>
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 43%;">判断基準</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: #fff8e1; height: 13.14%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">1</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">正確性</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">売上・仕入などの伝票入力や会計ソフトへの記帳を正確に行えているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司（課長）</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:頻繁にミスあり 2:時々ミスがある 3:基本的にミスはない 4:正確性が高い 5:完全に信頼できる水準</td>
+                            </tr>
+                            <tr style="height: 13.14%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">2</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">入力スピード</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">指定された期日までに適切な量のデータを処理できているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:期日に間に合わない 2:スピードが遅い 3:標準的な処理速度 4:早くかつ安定している 5:非常に効率的に処理している</td>
+                            </tr>
+                            <tr style="background: #fff8e1; height: 13.14%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">3</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">処理の責任性・整理力</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">入力に必要な資料の整理・ファイリング、書類の確認などが責任して正しく行われているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:書類の整理が不十分 2:書類確認ミスが目立つ 3:基本的には整理されている 4:整然と処理されている 5:常にわかりやすく整理・分類されている</td>
+                            </tr>
+                            <tr style="height: 13.14%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">4</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">規定・ルールの遵守</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">社内ルール・運用マニュアルに則って処理をしているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:ルール違反がある 2:意識が不十分 3:基本的に守っている 4:意識的に守っている 5:模範的に運用できている</td>
+                            </tr>
+                            <tr style="background: #fff8e1; height: 13.14%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">5</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">完了報告の正確性</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">「完了」と報告した業務が、実際に正しく完了しているか、確認の手順を他者にかけていないか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司、関係者</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:虚偽報告・放置あり（信頼できない）2:誤った報告等結果が返ってこられる 3:基本的には完了しているが確認が必要 4:ほぼ正確に報告できる 5:報告の内容と実際が常に一致しており信頼できる</td>
+                            </tr>
+                            <tr style="height: 13.14%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">6</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">責任感</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">自身の仕事に対して責任感を持って取り組んでいるか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:他者頼みが強く、放置する 2:ミスや不備を認めない 3:基本的に責任感を果たしている 4:自らキチンと対応できる 5:責任感が強く周囲から信頼されている</td>
+                            </tr>
+                            <tr style="background: #fff8e1; height: 13.14%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">7</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">報告・連絡・相談（報連相）</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">不備・遅延・未完了がある場合に、自らに正直に報告・相談しているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:報告相談がない・遅い・嘘が含む 2:言い訳が多い傾向がある 3:正直に連絡に行えている 4:不備や遅延に気づき、迅速なタイミングで正直に報告・相談できている 5:報連相の頻度となっている</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 情意面評価表 -->
+                <div id="attitudeTable" class="eval-table" style="width: 100%; height: 320px; border: 2px solid #ddd; border-radius: 8px; background: white; overflow: hidden; display: none;">
+                    <table style="width: 100%; height: 100%; font-size: 0.54em; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #27ae60; color: white; height: 8%;">
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 4%;">No</th>
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 13%;">評価タイトル</th>
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 31%;">詳細内容＜詳細＞</th>
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 9%;">評価者＜方法＞</th>
+                                <th style="border: 1px solid #ddd; padding: 2px; width: 43%;">判断基準</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: #f0fdf4; height: 18.4%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">1</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">誠実さ・真摯さ</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">指導や助言を受け入れ、改善に前向きに取り組んでいるか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司、同僚</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:反抗的・平気な対応・全く受け入れない 2:指摘に反発している・素直でない 3:改善できる・常に学ぶ姿勢がある</td>
+                            </tr>
+                            <tr style="height: 18.4%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">2</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">協調性・配慮</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">周囲と協調し、他者に対する思いやりや気配りができているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司、同僚</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:自己中心的・協調性がない 2:他人への配慮が不足 3:基本的に協調できる 4:周囲に配慮できる 5:全体の気配りを積極的にしている</td>
+                            </tr>
+                            <tr style="background: #f0fdf4; height: 18.4%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">3</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">意欲と敬意</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">同僚や他部署への意欲や敬意を持って接しているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司、同僚</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:無関心・無礼 2:態度が一貫していない 3:標準的に対応できる 4:相手に敬意を持っている 5:意欲と敬意の模範となっている</td>
+                            </tr>
+                            <tr style="height: 18.4%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">4</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">向上心・前向きさ</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">業務や自分の成長に対して前向きな意欲を持続、行動できているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:現状維持で十分という姿勢 2:指示がなければ動けない 3:前向きさはあるが結果的に保守的 4:主体的に学び行動している 5:常に成長に向き合っている</td>
+                            </tr>
+                            <tr style="background: #f0fdf4; height: 18.4%;">
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center; vertical-align: top;">5</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">安定感・冷静さ</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">感情の起伏が少なく、安定した行動・判断ができているか</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top;">上司</td>
+                                <td style="border: 1px solid #ddd; padding: 2px; vertical-align: top; line-height: 1.2;">1:感情的・不安定な言動あり 2:不安定さがやや表れる 3:基本的に冷静 4:冷静的行動ができる 5:周囲に安心感をもたれている</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="text-align: center; margin-top: 8px; font-size: 0.8em; color: #666;">
+                    添付資料：評価制度更新内容（現時点での見本）
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: まとめと今後の流れ -->
+        <div class="slide">
+            <h1>まとめと今後の流れ</h1>
+            
+            <h2>今後のスケジュール</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div><strong>システム移行:</strong> 「商蔵奉行」→「N-SYSTEM」（10月予定）</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div><strong>業務変更:</strong> 現在の入力業務が不要に</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div><strong>体制変更:</strong> 新しい部署・役割への異動</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div><strong>個別面談:</strong> 新しい配属先を決定</div>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <p style="text-align: center; font-weight: bold; color: #e74c3c;">
+                    ※面談の日程については、後日改めてご連絡いたします
+                </p>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="prevBtn" onclick="changeSlide(-1)">← 前へ</button>
+            <button class="btn" id="nextBtn" onclick="changeSlide(1)">次へ →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('slideNumber').textContent = currentSlide + 1;
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function changeSlide(n) {
+            if (currentSlide + n >= 0 && currentSlide + n < totalSlides) {
+                showSlide(currentSlide + n);
+            }
+        }
+        
+        // 評価制度表の切り替え機能
+        function switchEvaluationTab(tabType) {
+            const businessTab = document.getElementById('businessTab');
+            const attitudeTab = document.getElementById('attitudeTab');
+            const businessTable = document.getElementById('businessTable');
+            const attitudeTable = document.getElementById('attitudeTable');
+            
+            if (tabType === 'business') {
+                businessTab.classList.add('active');
+                attitudeTab.classList.remove('active');
+                businessTable.style.display = 'block';
+                attitudeTable.style.display = 'none';
+            } else {
+                businessTab.classList.remove('active');
+                attitudeTab.classList.add('active');
+                businessTable.style.display = 'none';
+                attitudeTable.style.display = 'block';
+            }
+        }
+        
+        // 初期設定
+        showSlide(0);
+        
+        // キーボード操作
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+    </script>
+</body>
+</html>
